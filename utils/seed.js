@@ -15,7 +15,7 @@ connection.once("open", async () => {
   await User.deleteMany({});
 
   const users = [];
-  //   const thoughts = getRandomThought(10);
+  const thoughts = getRandomThought(10);
   const userthoughts = getRandomThought(3);
   const userfriends = getRandomFriends(3);
 
@@ -34,7 +34,7 @@ connection.once("open", async () => {
 
   await User.collection.insertMany(users);
 
-  //   await Thought.collection.insertMany(thoughts);
+  await Thought.collection.insertMany(thoughts);
 
   // loop through the saved Thoughts, for each Thought we need to generate a Thought response and insert the Thought responses
   console.table(users);

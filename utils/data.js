@@ -174,6 +174,15 @@ const possibleReactions = [
   "Wonderful",
   "No",
   "How cool",
+  "Cool!",
+  "I like this",
+  "AWWWWW",
+  "This is so fake",
+  "i love this",
+  "hahahaha",
+  "LOOOL",
+  "lmao",
+  "okay sure",
 ];
 
 const possibleThoughts = [

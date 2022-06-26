@@ -15,6 +15,7 @@ connection.once("open", async () => {
   await User.deleteMany({});
 
   const users = [];
+  const friends = [];
   const thoughts = getRandomThought(10);
   const userthoughts = getRandomThought(3);
   const userfriends = getRandomFriends(3);
@@ -28,7 +29,7 @@ connection.once("open", async () => {
       username,
       email,
       thoughts: [...userthoughts],
-      friends: [...userfriends],
+      friends,
     });
   }
 

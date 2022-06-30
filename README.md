@@ -3,6 +3,9 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ## Description
 Manage your social media platform with this backend using CRUD APIs and mongoDB. Add friends, users and posts, and even add REACTIONS to those posts all managed in one place.
+
+Walkthrough video [here](https://github.com/Key16/Social-Media-API)
+
 ## Table of Contents
 
 * [Installation](#installation)

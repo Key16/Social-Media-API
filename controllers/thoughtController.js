@@ -41,7 +41,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  // Updates and application using the findOneAndUpdate method. Uses the ID, and the $set operator in mongodb to inject the request body. Enforces validation.
+  // Updates thought using the findOneAndUpdate method. Uses the ID, and the $set operator in mongodb to inject the request body. Enforces validation.
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -58,54 +58,54 @@ module.exports = {
         res.status(500).json(err);
       });
   },
-  //   // Deletes an application from the database. Looks for an app by ID.
-  //   // Then if the app exists, we look for any users associated with the app based on he app ID and update the thoughts array for the User.
-  //   deleteApplication(req, res) {
-  //     Thought.findOneAndRemove({ _id: req.params.thoughtId })
-  //       .then((application) =>
-  //         !application
-  //           ? res.status(404).json({ message: "No application with this id!" })
-  //           : User.findOneAndUpdate(
-  //               { thoughts: req.params.thoughtId },
-  //               { $pull: { thoughts: req.params.thoughtId } },
-  //               { new: true }
-  //             )
-  //       )
-  //       .then((user) =>
-  //         !user
-  //           ? res.status(404).json({
-  //               message: "Thought created but no user with this id!",
-  //             })
-  //           : res.json({ message: "Thought successfully deleted!" })
-  //       )
-  //       .catch((err) => res.status(500).json(err));
-  //   },
-  //   // Adds a Reaction to an application. This method is unique in that we add the entire body of the Reaction rather than the ID with the mongodb $addToSet operator.
-  //   addReaction(req, res) {
-  //     Thought.findOneAndUpdate(
-  //       { _id: req.params.thoughtId },
-  //       { $addToSet: { reactions: req.body } },
-  //       { runValidators: true, new: true }
-  //     )
-  //       .then((application) =>
-  //         !application
-  //           ? res.status(404).json({ message: "No application with this id!" })
-  //           : res.json(application)
-  //       )
-  //       .catch((err) => res.status(500).json(err));
-  //   },
-  //   // Remove application Reaction. This method finds the application based on ID. It then updates the reactions array associated with the app in question by removing it's ReactionId from the reactions array.
-  //   removeReaction(req, res) {
-  //     Thought.findOneAndUpdate(
-  //       { _id: req.params.thoughtId },
-  //       { $pull: { reactions: { reactionId: req.params.reactionId } } },
-  //       { runValidators: true, new: true }
-  //     )
-  //       .then((application) =>
-  //         !application
-  //           ? res.status(404).json({ message: "No application with this id!" })
-  //           : res.json(application)
-  //       )
-  //       .catch((err) => res.status(500).json(err));
-  //   },
+  // Deletes an application from the database. Looks for an app by ID.
+  // Then if the app exists, we look for any users associated with the app based on he app ID and update the thoughts array for the User.
+  deleteThought(req, res) {
+    Thought.findOneAndRemove({ _id: req.params.thoughtId })
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this id!" })
+          : User.findOneAndUpdate(
+              { thoughts: req.params.thoughtId },
+              { $pull: { thoughts: req.params.thoughtId } },
+              { new: true }
+            )
+      )
+      .then((user) =>
+        !user
+          ? res.status(404).json({
+              message: "Could not delete!",
+            })
+          : res.json({ message: "Thought successfully deleted!" })
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+  // Adds a Reaction to an thought. This method is unique in that we add the entire body of the Reaction rather than the ID with the mongodb $addToSet operator.
+  addReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $addToSet: { reactions: req.body } },
+      { runValidators: true, new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this id!" })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+  // Remove thought Reaction. This method finds the thought based on ID. It then updates the reactions array associated with the app in question by removing it's ReactionId from the reactions array.
+  removeReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { runValidators: true, new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res.status(404).json({ message: "No thought with this id!" })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
